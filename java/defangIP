@@ -1,0 +1,29 @@
+class Solution {
+    public static String defangIPaddr(String address) {
+        StringBuilder ipAddressBuilder = new StringBuilder();
+        int i = 0;
+        while (i < address.length()) {
+            if(i < address.length()+1)
+            {
+                if(address.charAt(i) == '.')
+                {
+                    ipAddressBuilder.append('[');
+                    ipAddressBuilder.append(address.charAt(i));
+                    ipAddressBuilder.append(']');
+                    i++;
+                    continue;
+                }
+                else
+                {
+                    ipAddressBuilder.append(address.charAt(i));
+                }
+            }
+            else ipAddressBuilder.append(address.charAt(i)); i++;
+        }
+        return String.valueOf(ipAddressBuilder);
+    }
+    public static void main(String[] args)
+    {
+        System.out.println(defangIPaddr("1.1.1.1"));
+    }
+}
