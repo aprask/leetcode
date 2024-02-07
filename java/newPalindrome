@@ -1,0 +1,16 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+    String firstStr = Integer.toString(x);
+    int h = firstStr.length();
+    String secondStr = "";
+    while(h >= 0)
+    {
+        if(h == 0) {
+            return firstStr.equals(secondStr);
+        }
+        secondStr = secondStr.concat(String.valueOf(firstStr.charAt(h-1)));
+        h--;
+    }
+        return false;
+    }
+}
