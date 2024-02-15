@@ -1,0 +1,109 @@
+public class ListNode {
+    int val;
+    ListNode next;
+
+    public ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+class Solution {
+    // Method to insert a new node with data 'X' at the beginning of a singly linked list
+    public ListNode insertAtBeginning(ListNode head, int x) {
+        ListNode newVal = new ListNode(x);
+        if(head == null) {
+            return newVal;
+        }
+        newVal.next = head;
+        return newVal;
+    }
+
+    // Method to insert a new node with data 'X' at the end of a singly linked list
+    public ListNode insertAtEnd(ListNode head, int x) {
+        ListNode newVal = new ListNode(x);
+        if(head == null) {
+            return newVal;
+        }
+        ListNode current = head;
+        while(true) {
+            if(current.next == null) {
+                current.next = newVal;
+                return head;
+            }
+            current = current.next;
+        }
+    }
+
+    // Method to delete the first occurrence of a node with data 'X' from a singly linked list
+    public ListNode deleteByValue(ListNode head, int x) {
+        ListNode current = head;
+        ListNode prev = null;
+        while (current != null) {
+            if(current.val == x) {
+                if(prev == null) {
+                    head = head.next; // remove first node
+                }
+                else {
+                    prev.next = current.next;
+                    return head;
+                }
+            }
+            prev = current;
+            current = current.next;
+        }
+        return head;
+    }
+
+    // Method to search for the first occurrence of a node with data 'X' in a singly linked list and return its index (position)
+    public int searchByValue(ListNode head, int x) {
+        int index = 0;
+        ListNode current = head;
+        while(current != null) {
+            if(current.val == x) {
+                return index;
+            }
+            current = current.next;
+            index++;
+        }
+        return -1; // could not find the value
+    }
+
+    // Method to count the number of nodes in a singly linked list
+    public int countNodes(ListNode head) {
+        int count = 0;
+        ListNode current = head;
+        while(current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null) {
+            return l2;
+        }
+        else if(l2 == null) {
+            return l1;
+        }
+        ListNode dummyNode = new ListNode(0);
+        ListNode curr = dummyNode;
+        while (l1.next != null && l2.next != null) {
+            if(l1.val > l2.val) {
+                curr.next  = l2;
+                l2 = l2.next;
+            } else {
+                curr.next = l1;
+                l1 = l1.next;
+            }
+            curr = curr.next;
+        }
+        if (l1 != null) {
+            curr.next = l1;
+        } else {
+            curr.next = l2;
+        }
+        return dummyNode.next;
+    }
+}
